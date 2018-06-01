@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <title>Client service kabbi</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+  </head>
+  <body class="sidebar-mini fixed">
+      <div style="display: none;" id="data_base"></div>
+    <div class="wrapper">
+      <!-- Navbar-->
+      <header class="main-header hidden-print"><a class="logo" href="index.html">Client kabbi</a>
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button--><a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
+          <!-- Navbar Right Menu-->
+          <div class="navbar-custom-menu">
+            <ul class="top-nav">
+              <!--Notification Menu-->
+              <li class="dropdown notification-menu"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i></a></li>
+              <!-- User Menu-->
+              <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Side-Nav-->
+      <aside class="main-sidebar hidden-print">
+        <section class="sidebar">
+          <div class="user-panel">
+            <div class="pull-left image"><img class="img-circle" src="/images/logo.png" alt="User Image"></div>
+            <div class="pull-left info">
+              <p>Client v.0.0.5</p>
+              <p class="designation">Client kabbi service</p>
+            </div>
+          </div>
+          <!-- Sidebar Menu-->
+          <ul class="sidebar-menu">
+            <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i><span>Main</span></a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>UserMap</span><i class="fa fa-angle-right"></i></a></li>
+            <li><a href="#"><i class="fa fa-pie-chart"></i><span>UserDirect</span></a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-edit"></i><span>UserSEO</span><i class="fa fa-angle-right"></i></a></li>
+          </ul>
+        </section>
+      </aside>
+      <div class="content-wrapper">
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-dashboard"></i> Client kabbi service</h1>
+            <p>Multiuser taxi service</p>
+          </div>
+          <div>
+            <ul class="breadcrumb">
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li><a href="#">Main</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <h3 class="card-title">The route search &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-xs disabled" id="but_cl" href="#">Search companions</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="span_element" style="font-size: 14px; color: red; display: inline;"> Move the start and end pointers</span>                
+              </h3>
+                <!--------------------------------->
+                <div id="map"></div>
+                <!--------------------------------->
+            </div>
+          </div>
+          <!--------------------------------------->
+         <div class="col-md-12">
+            <div class="card">
+              <h3 class="card-title">Found trips</h3>
+              <!----------------------------------------------->
+                    <div class="bs-component" id="blue_line">
+                      <div class="alert alert-dismissible alert-info">
+                        <button class="close" type="button" data-dismiss="alert">×</button><span id="blue_line2">Мы подыщем вам попутчика</span>
+                      </div>
+                    </div>
+              
+              
+              
+              <!----------------------------------------------->
+                    <div class="panel panel-danger" style="display: none;" id="danger_window">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Enter Name this name will be the login (minimum 4 symbols, without spaces)</h3>
+                        </div>
+                        <div class="panel-body">
+                              <input id="focusedInput" type="text" value="First name">&nbsp;<a class="btn btn-warning" id="add_passanger" href="#">Add passanger</a>
+<!--------------------------------------------------------------------------->                              
+<!------------------------------- Alert ------------------------------------->
+                    <p>
+                     <div class="bs-component" style="display: none;" id="the_error">
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button><strong>OH ERROR!</strong>Sorry, but the data you entered is incorrect or is the same as it is. Re-enter with a different name.
+                      </div>
+                    </div>
+                    </p>
+<!-------------------------------------------------------------------------->                    
+<!------------------------------ Successfully ------------------------------->
+                   <p>
+                    <div class="bs-component" style="display: none;" id="the_happy">
+                      <div class="alert alert-dismissible alert-success">
+                        <button class="close" type="button" data-dismiss="alert">×</button><strong>SUCCESSFULLY</strong>Your data is accepted, there is a travel companion search for your trip.
+                      </div>
+                    </div>
+                    </p>
+<!--------------------------------------------------------------------------->                    
+                        </div>
+                    </div>
+            </div>
+          </div>
+          <!---------------------------------------->
+        </div>
+      </div>
+    </div>
+    <!-- Javascripts-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/pace.min.js"></script>
+    <script src="js/main.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnfBk_cob6Brl2wNtWbKcjcgsiBz5E1Oc&callback=initMap">
+    </script>
+    <!------------------------------------------------------------------------------------------->
+    <script type="text/javascript">
+    /*---------------------------------------------------------------------------------------*/
+      function initMap() {
+        var latlng2 = new google.maps.LatLng(49.894056, 10.900180);
+        var latlng = new google.maps.LatLng(49.892798, 10.899000);
+
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        
+        var map = new google.maps.Map(document.getElementById('map'), {
+                                                                          zoom: 16,
+                                                                          center: latlng
+                                                                        });
+        directionsDisplay.setMap(map);
+        
+        var marker = new google.maps.Marker({
+                                            position: latlng,
+                                            map: map,
+                                                icon: {
+                                                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                                        scale: 7,
+                                                        fillColor: "#B0EE",
+                                                        fillOpacity: 0.9,
+                                                        strokeWeight: 0.4
+                                                    },
+                                            title: 'Passanger-1 start',
+                                            label: '1S',
+                                            draggable: true
+                                            });
+       
+        var marker1 = new google.maps.Marker({
+                                            position: latlng2,
+                                            map: map,
+                                            icon: {
+                                                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                                        scale: 7,
+                                                        fillColor: "#B0EE",
+                                                        fillOpacity: 0.9,
+                                                        strokeWeight: 0.4
+                                                    },
+                                            title: 'Passanger-1 finish',
+                                            label: '1F',
+                                            draggable: true
+                                            });
+        
+        window.marker_global = marker;
+        window.marker1_global = marker1;
+
+        google.maps.event.addListener(marker, 'dragend', function(a) {
+                                                                    var coords_marker1_lat = marker1.getPosition().lat().toFixed(6);
+                                                                    var coords_marker1_lng = marker1.getPosition().lng().toFixed(6);
+
+                                                                    var latlng1 = new google.maps.LatLng(coords_marker1_lat, coords_marker1_lng);            
+            
+                                                                    var lat = a.latLng.lat().toFixed(6);
+                                                                    var lng = a.latLng.lng().toFixed(6);
+                                                                    var latlng = new google.maps.LatLng(lat, lng);
+            
+            
+                                                                    var complex = {
+                                                                                    origin: latlng,
+                                                                                    destination: latlng1,
+                                                                                    travelMode: 'DRIVING'
+                                                                                    };
+                                                                    calculateAndDisplayRoute(directionsService, directionsDisplay,complex);
+                                                                    $('#but_cl').removeClass("disabled");
+                                                                    $("#span_element").empty();
+                                                                    $("#span_element").html('<<< Press the button after you select a route');
+                                                                    });  
+
+
+        google.maps.event.addListener(marker1, 'dragend', function(a) {
+                                                                    var coords_marker_lat = marker.getPosition().lat().toFixed(6);
+                                                                    var coords_marker_lng = marker.getPosition().lng().toFixed(6);
+
+                                                                    var latlng = new google.maps.LatLng(coords_marker_lat, coords_marker_lng);            
+            
+                                                                    var lat2 = a.latLng.lat().toFixed(6);
+                                                                    var lng2 = a.latLng.lng().toFixed(6);
+                                                                    var latlng2 = new google.maps.LatLng(lat2, lng2);
+            
+            
+                                                                    var complex = {
+                                                                                    origin: latlng,
+                                                                                    destination: latlng2,
+                                                                                    travelMode: 'DRIVING'
+                                                                                    };
+                                                                    calculateAndDisplayRoute(directionsService, directionsDisplay,complex);
+                                                                    
+                                                                    $('#but_cl').removeClass("disabled");
+                                                                    $("#span_element").empty();
+                                                                    $("#span_element").html('<<< Press the button after you select a route');
+                                                                    });                                                                     
+//---------------------------------------------------------------------------------------------------------------------------------------------        
+      }
+/*-----------------------------------------------------------------------------------*/
+$("#but_cl").click(function(){
+                            $("#blue_line").hide();
+    
+                            var summary_distance = {};
+                            var min_dist = 9999;
+                            var id_min = 0;
+    
+                            var marker = window.marker_global;
+                            var coords_marker_lat = marker.getPosition().lat().toFixed(6); //marker coords
+                            var coords_marker_lng = marker.getPosition().lng().toFixed(6);  //marker coords
+                            
+                            
+                            var marker1 = window.marker1_global;
+                            var coords_marker1_lat = marker1.getPosition().lat().toFixed(6); //marker coords
+                            var coords_marker1_lng = marker1.getPosition().lng().toFixed(6);  //marker1 coords
+                            
+                            
+                            var latlng = new google.maps.LatLng(coords_marker_lat, coords_marker_lng);
+                            var latlng2 = new google.maps.LatLng(coords_marker1_lat, coords_marker1_lng);
+                                                            
+
+
+                            //console.log(coords_marker_lat);
+                            //console.log(coords_marker_lng);
+                            $("#danger_window").show();
+                            $("#add_passanger").click(function()
+                            {
+                                var first_name = $("#focusedInput").val();
+
+                                    if((first_name=='first name')||(first_name.length<4)||(hasWhiteSpace(first_name)))
+                                    {
+                                        $("#the_happy").hide();
+                                        $("#the_error").show();
+                                }else{
+                                        $("#the_error").hide();
+                                        $("#the_happy").show();   
+                                    
+
+
+                                    $.ajax(
+                                        {
+                                            url: complex_line,
+                                            async: false,
+                                            success: function(data) 
+                                            {
+                                                //console.log('Base added user OK');
+                                            }
+                                        }
+                                            );
+                                    
+                                    //----------------------------------start get data from base--------------------
+                                    $.ajax({
+                                              dataType: 'json',
+                                              url: 'get_mysql.php',
+                                              success: function(jsondata){
+                                                                            //console.log(jsondata);
+                                                                            var directionsService = new google.maps.DirectionsService;
+                                                                            var directionsDisplay = new google.maps.DirectionsRenderer;
+                                                                           $.each(jsondata,function(index,value){
+                                    //************************************************************************************************************************************              
+                                    //*************************************//Analysis pair of points//********************************************************************
+                                                                                                    var latlng3 = new google.maps.LatLng(value.lat_start, value.lng_start);
+                                                                                                    var latlng4 = new google.maps.LatLng(value.lat_finish, value.lng_finish);
+
+                                                                                                       var request = {
+                                                                                                                        origin: latlng,
+                                                                                                                        destination: latlng2,
+                                                                                                                        waypoints: [{
+                                                                                                                                        location: latlng3,
+                                                                                                                                        stopover: true
+                                                                                                                                    },{
+                                                                                                                                        location: latlng4,
+                                                                                                                                        stopover: true
+                                                                                                                                    }],
+                                                                                                                        travelMode: 'DRIVING'
+                                                                                                                    };
+               directionsService.route(request, function(result, status) {
+                                                                         if (status == google.maps.DirectionsStatus.OK) 
+                                                                         {
+                                                                              directionsDisplay.setDirections(result);
+                                                                              var routes = result.routes;
+                                                                              //console.log(routes[0].legs);
+                                                                              var num_sum = 0;
+                                                                              $.each(routes[0].legs,function(index,value)
+                                                                              {
+                                                                                  number = value.distance.text;
+                                                                                  num = number.replace(/,/g,'.').replace(/км/g,'').replace(/\s/g,'');
+                                                                                  if(num.indexOf('м')==-1) num=num; else num=0.1;
+                                                                                //  if(num.indexOf('m')==-1) num=num; else num=0.1;
+                                                                                  num_sum +=parseFloat(num);
+                                                                              })
+                                                                              var all_distance = num_sum.toFixed(2);
+                                                                              //console.log("get_minimum.php?all_dist="+all_distance+"&minimum="+min_dist+"&id="+value.id+"&id_min="+id_min);
+                                                                              $.ajax({
+                                                                                        url: "get_minimum.php?all_dist="+all_distance+"&minimum="+min_dist+"&id="+value.id+"&id_min="+id_min,
+                                                                                        async: false,
+                                                                                        success: function(data) 
+                                                                                                                {
+                                                                                                                    var data = JSON.parse(data);
+                                                                                                                    min_dist = data[1];
+                                                                                                                    id_min = data[0];
+                                                                                                                    if(index>8)
+                                                                                                                    {
+                                                                                                                        out_card_new_user(latlng,latlng2,id_min);
+                                                                                                                    }
+                                                                                                                
+                                                                                                                }
+                                                                                    });
+                                                                         } 
+                                                                         else {
+                                                                         };
+                                                                    });
+                                    //******************************************************************************************************************************************* 
+                                    //*******************************************************************************************************************************************
+                                                                           })
+                                                                        }
+                                                                        
+                                    });
+                                    //<!------------------------------------------------------------------->
+                                    //<!-------------------------Insert into------------------------------>
+                                    var complex_line = "set_mysql.php?name="+first_name+"&lat_start="+coords_marker_lat+"&lng_start="+coords_marker_lng+"&lat_finish="+coords_marker1_lat+"&lng_finish="+coords_marker1_lng;
+                                    $.ajax(
+                                        {
+                                            url: complex_line,
+                                            async: false,
+                                            success: function(data) 
+                                            {
+                                                 //console.log('Base added user OK');
+                                            }
+                                        }
+                                            );
+                                   //------------------------------------------------------------------------------         
+                                } 
+                            })
+})
+/*-----------------------------------------------------------------------------------*/
+     function calculateAndDisplayRoute(directionsService, directionsDisplay,complex) {
+        directionsService.route(complex, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function hasWhiteSpace(s) {	
+	                            return /\s/g.test(s);
+                                }
+    function call_min_func(data)
+    {
+        console.log(typeof(data));
+        //min_dist=data.min_dist;
+        return data["min_dist"];
+    }
+    function out_card_new_user(latlng,latlng2,id_min){
+                var directionsService = new google.maps.DirectionsService;
+                var directionsDisplay = new google.maps.DirectionsRenderer;
+                $.ajax({
+                url: "get_second_id.php?id="+id_min,
+                async: false,
+                success: function(data) 
+                {
+                    var data = JSON.parse(data);
+                    //console.log(data);
+                    //-------------------------------------------------------------------
+                                var latlng_start = new google.maps.LatLng(data["lat_start"], data["lng_start"]);
+                                var latlng_finish = new google.maps.LatLng(data["lat_finish"], data["lng_finish"]);
+
+                                var directionsService = new google.maps.DirectionsService;
+                                var directionsDisplay = new google.maps.DirectionsRenderer;
+        
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                                                                                  zoom: 16,
+                                                                                                  center: latlng_start,
+                                                                                            });
+                                directionsDisplay.setMap(map);
+
+                                var complex = {
+                                                origin: latlng,
+                                                destination: latlng2,
+                                                waypoints: [{
+                                                            location: latlng_start,
+                                                            stopover: true
+                                                            },{
+                                                            location: latlng_finish,
+                                                            stopover: true
+                                                            }],
+                                                travelMode: 'DRIVING'
+                                            };
+                                calculateAndDisplayRoute(directionsService, directionsDisplay,complex);                                            
+                    //---------------------------------------------------------------------
+                                var name_second = data["name"];
+                                $("#danger_window").hide();
+                                $("#blue_line").show();
+                                $("#blue_line2").html("Имя Вашего попутчика - ");
+                                $("#blue_line2").append(name_second);
+                    //----------------------------------------------------------------------
+                }
+                                                                                    });
+    }
+    /*-------------------------------------------------------------------------------------*/  
+      </script>
+    <!------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
+  </body>
+</html>
